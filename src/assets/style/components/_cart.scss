@@ -1,13 +1,234 @@
 @import "../fonts.scss";
 
 .cart {
-  &.active {
-    position: absolute;
-    z-index: 999;
+  &-wrapper {
+    position: fixed;
+    z-index: -1;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(200, 200, 200, 0.5);
+    &.active {
+      z-index: 2;
+      background-color: rgba($color: #000000, $alpha: 0.5);
+    }
+  }
+
+  &__content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 30px;
+  }
+
+  &__box {
+    padding: 30px;
+    transform: translateX(200%);
+    position: fixed;
+    z-index: 3;
+    right: 0;
+    max-width: 385px;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    opacity: 0;
+    transition: all 0.3s linear;
+    &.active {
+      transform: translateX(0);
+      opacity: 1;
+      transition: all 0.3s linear;
+    }
+
+    &-title {
+      color: #000;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    &-close {
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    &-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__products {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__product {
+    border-radius: 20px;
+    padding: 20px 20px 30px 20px;
+    border: 1px solid #f3f3f3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-img {
+      width: 70px;
+      height: 70px;
+    }
+
+    &-info {
+      &-title {
+        color: #000;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+        width: 150px;
+      }
+
+      &-price {
+        color: #000;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: normal;
+      }
+    }
+
+    &-btn {
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+
+  &__bottom {
+    // width: 325px;
+    // position: absolute;
+    // bottom: 30px;
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &-border {
+      display: flex;
+      align-self: flex-end;
+      width: 50%;
+      border-bottom: 1px dashed #dfdfdf;
+    }
+
+    &-total,
+    &-tax {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &-title {
+        color: #000;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      &-price {
+        color: #000;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+
+    &-btn {
+      position: relative;
+      border-radius: 18px;
+      background: #9dd458;
+      padding: 20px 0;
+      color: #fff;
+      text-align: center;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      cursor: pointer;
+
+      &::after {
+        content: "";
+        position: absolute;
+        background-image: url("../../../../public/images/arrow.svg");
+        background-repeat: no-repeat;
+        width: 20px;
+        height: 14px;
+        bottom: 22px;
+        right: 33px;
+        transition: all .2s linear;
+      }
+
+      &:hover{
+        &::after{
+          right: 20px;
+        }
+      }
+    }
+  }
+
+  &__empty {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &-title {
+      margin-top: 20px;
+      color: #000;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+    &-subtitle {
+      margin-top: 9px;
+      width: 285px;
+      color: rgba($color: #000000, $alpha: 0.4);
+      text-align: center;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px; /* 150% */
+    }
+
+    &-btn {
+      position: relative;
+      width: 255px;
+      margin-top: 40px;
+      border-radius: 18px;
+      background: #9dd458;
+      padding: 17px 0 19px 0;
+      color: #fff;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: normal;
+      cursor: pointer;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 31px;
+        bottom: 22px;
+        transform: rotate(180deg);
+        background-image: url(../../../../public/images/arrow.svg);
+        width: 16px;
+        height: 14px;
+        transition: all 0.2s linear;
+      }
+
+      &:hover {
+        &::before {
+          left: 20px;
+        }
+      }
+    }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <Navbar />
-    <Cart :openCart="openCart" />
+    <Navbar :openCart="openCart" @ClickCart="ClickCart" />
+    <Cart :openCart="openCart" @CloseCart="CloseCart" />
     <RouterView />
   </div>
 </template>
@@ -11,6 +11,13 @@ import { ref } from "vue";
 import Navbar from "@/components/Navbar.vue";
 import Cart from "@/components/Cart.vue";
 
-const openCart = ref(true)
+const openCart = ref(false);
 
+const ClickCart = (open) => {
+  openCart.value = open;
+};
+
+const CloseCart = (close) => {
+  openCart.value = close;
+};
 </script>

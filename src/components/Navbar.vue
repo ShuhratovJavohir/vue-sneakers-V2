@@ -2,16 +2,16 @@
   <div class="container">
     <nav class="nav">
       <!-- nav__logo -->
-      <a class="nav__logo" href="#">
+      <router-link to="/" class="nav__logo">
         <img class="nav__logo-img" src="@/assets/images/logo.png" alt="logo" />
         <div class="nav__logo-name">
           <h3>VUE SNEAKERS</h3>
           <p>Магазин лучших кроссовок</p>
         </div>
-      </a>
+      </router-link>
       <!-- nav__list -->
       <ul class="nav__list">
-        <li class="nav__list-item" @click="openCart = true">
+        <li class="nav__list-item" @click="$emit('clickCart', true)">
           <a class="nav__list-link cart-btn" href="#">
             <img src="@/assets/images/cart.svg" alt="" />
             <span>1250 руб.</span>
@@ -19,9 +19,9 @@
         </li>
 
         <li class="nav__list-item">
-          <a class="nav__list-link like" href="#">
+          <router-link to="/like" class="nav__list-link like">
             <img src="@/assets/images/like.svg" alt="" />
-          </a>
+          </router-link>
         </li>
 
         <li class="nav__list-item">
@@ -36,4 +36,5 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
 </script>
