@@ -15,9 +15,11 @@
         <p>Цена:</p>
         <h3>{{ product.price }} руб.</h3>
       </div>
-      <button class="product-add" @click="addProductToCart(product)">
-        <img v-if="addToCart" src="@/assets/images/addToCart.svg" alt="" />
-        <img v-else src="@/assets/images/add.svg" alt="" />
+      <button v-if="product.inCart" class="product-add" @click="delProduct(product)">
+        <img src="@/assets/images/addToCart.svg" alt="" />
+      </button>
+      <button v-else class="product-add" @click="addProductToCart(product)">
+        <img src="@/assets/images/add.svg" alt="" />
       </button>
     </div>
   </div>
@@ -29,12 +31,16 @@ import { useCart } from "@/store/cart";
 
 const storeCart = useCart();
 const cart = storeCart.cart;
-const addToCart = ref(false);
 
 const addProductToCart = (product) => {
-  addToCart.value = true;
+  product.inCart = true;
   cart.push(product);
-  console.log(storeCart.cart);
+};
+
+const delProduct = (product) => {
+  product.inCart = false;
+  let index = cart.findIndex(el => el.id == product.id)
+  cart.splice(index, 1)
 };
 
 // Получаем через пропсы массив с каждым товаром

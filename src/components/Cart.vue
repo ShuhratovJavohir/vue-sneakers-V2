@@ -25,7 +25,7 @@
               </p>
               <h3 class="cart__product-info-price">{{product.price}}руб.</h3>
             </div>
-            <button class="cart__product-btn">
+            <button class="cart__product-btn" @click="delProduct(product)">
               <img src="@/assets/images/delete.svg" alt="" />
             </button>
           </li>
@@ -71,6 +71,12 @@ import { useCart } from "@/store/cart";
 
 const storeCart = useCart();
 const cart = storeCart.cart;
+
+const delProduct = (product) => {
+  product.inCart = false
+  let index = cart.findIndex(el => el.id == product.id)
+  cart.splice(index, 1)
+}
 
 // Получаем название каждой картинки
 const imagesName = computed(() => props.product.images);
