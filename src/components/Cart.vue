@@ -78,6 +78,8 @@ const delProduct = (product) => {
   cart.splice(index, 1)
 }
 
+
+
 // Получаем название каждой картинки
 const imagesName = computed(() => props.product.images);
 

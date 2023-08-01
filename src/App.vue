@@ -15,9 +15,12 @@ const openCart = ref(false);
 
 const ClickCart = (open) => {
   openCart.value = open;
+  document.body.classList.add('active')
 };
 
 const CloseCart = (close) => {
   openCart.value = close;
+  document.body.classList.remove('active')
+
 };
 </script>

@@ -1,8 +1,14 @@
 <template>
   <div class="product">
-    <button class="product-like">
+    <button
+      v-if="product.inLike"
+      class="product-like"
+      @click="delLike(product)"
+    >
+      <img src="@/assets/images/likeadd.svg" alt="" />
+    </button>
+    <button v-else class="product-like" @click="addToLike(product)">
       <img src="@/assets/images/addLike.svg" alt="" />
-      <!-- <img src="@/assets/images/likeadd.svg" alt=""> -->
     </button>
     <img
       :src="getImages(product.images)"
@@ -15,7 +21,11 @@
         <p>Цена:</p>
         <h3>{{ product.price }} руб.</h3>
       </div>
-      <button v-if="product.inCart" class="product-add" @click="delProduct(product)">
+      <button
+        v-if="product.inCart"
+        class="product-add"
+        @click="delProduct(product)"
+      >
         <img src="@/assets/images/addToCart.svg" alt="" />
       </button>
       <button v-else class="product-add" @click="addProductToCart(product)">
@@ -28,19 +38,37 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { useCart } from "@/store/cart";
+import { useLike } from "@/store/like";
 
+// Для корзины
 const storeCart = useCart();
-const cart = storeCart.cart;
+const carts = storeCart.cart;
 
+// Для like
+const storeLike = useLike();
+const likes = storeLike.likes;
+
+// Метод для добавление продукта в корзину
 const addProductToCart = (product) => {
   product.inCart = true;
-  cart.push(product);
+  carts.push(product); 
 };
-
+// Метод для удаление продукта из корзины
 const delProduct = (product) => {
   product.inCart = false;
-  let index = cart.findIndex(el => el.id == product.id)
-  cart.splice(index, 1)
+  let index = carts.findIndex((el) => el.id == product.id);
+  carts.splice(index, 1);
+};
+
+const addToLike = (product) => {
+  product.inLike = true;
+  likes.push(product)
+};
+
+const delLike = (product) => {
+  product.inLike = false;
+  let index = likes.findIndex((el) => el.id == product.id);
+  likes.splice(index, 1);
 };
 
 // Получаем через пропсы массив с каждым товаром

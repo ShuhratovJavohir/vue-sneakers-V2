@@ -1,0 +1,70 @@
+@import "../fonts.scss";
+
+.like {
+  margin-top: 40px;
+
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    &-title {
+      color: #000;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+  &__empty {
+    margin: 100px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    &-subtitle {
+      margin-top: 15px;
+      color: rgb(0, 0, 0, 0.5);
+      text-align: center;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px; /* 150% */
+    }
+
+    &-btn {
+      margin-top: 30px;
+      display: block;
+      position: relative;
+      border-radius: 18px;
+      background: #9dd458;
+      padding: 17px 0 19px 0;
+      color: #fff;
+      text-align: center;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      cursor: pointer;
+      width: 245px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        transform: rotate(180deg);
+        background-image: url("../../../../public/images/arrow.svg");
+        background-repeat: no-repeat;
+        width: 20px;
+        height: 14px;
+        bottom: 22px;
+        left: 20px;
+        transition: all 0.2s linear;
+      }
+
+      &:hover {
+        &::after {
+          left: 10px;
+        }
+      }
+    }
+  }
+}
