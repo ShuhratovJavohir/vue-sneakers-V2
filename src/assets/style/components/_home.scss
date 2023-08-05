@@ -1,0 +1,50 @@
+@import "../fonts.scss";
+
+.home {
+  margin-top: 40px;
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-title {
+      max-width: 650px;
+      width: 100%;
+      color: #000;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: normal;
+      overflow-x: auto;
+    }
+
+    &-search {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      border-radius: 10px;
+      border: 1px solid #f3f3f3;
+      padding: 15px 18px;
+
+      & img {
+        width: 14px;
+        height: 14px;
+      }
+
+      & input {
+        border: none;
+        outline: none;
+      }
+
+      &-clear{
+        cursor: pointer;
+      }
+    }
+  }
+  &__wrapper {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+}

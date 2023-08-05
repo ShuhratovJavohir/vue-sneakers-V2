@@ -1,10 +1,50 @@
-<template>
-	<div class="home container">
-		<Products/>
-	</div>
-</template>
-
 <script setup>
-import Products from '@/components/Products.vue'
+import { ref, computed, onMounted, watch } from "vue";
+import { useProductStore } from "@/store/products.js";
+import { useCartStore } from "@/store/cart.js";
+import Product from "@/components/Product.vue";
+import Loading from "@/components/Loading.vue";
 
+const productsStore = useProductStore();
+
+const search = ref("");
+
+const getProducts = computed(() => {
+  return productsStore.items;
+});
+
+setTimeout(() => {
+  productsStore.fetchItems();
+}, 3000);
 </script>
+
+<template>
+  <div class="container">
+    <div class="home" v-if="!productsStore.isLoading">
+      <div class="home__top">
+        <h2 class="home__top-title">
+          {{ search.length == 0 ? "Все кросовки" : "Поиск: " + search }}
+        </h2>
+        <div class="home__top-search">
+          <img
+            v-if="search.length == 0"
+            src="@/assets/images/search.svg"
+            alt=""
+          />
+          <img
+            v-else
+            @click="search = ''"
+            class="home__top-search-clear"
+            src="@/assets/images/clear.svg"
+            alt=""
+          />
+          <input v-model="search" type="text" placeholder="Поиск..." />
+        </div>
+      </div>
+      <div class="home__wrapper">
+        <Product v-for="item in getProducts" :key="item.id" :item="item" />
+      </div>
+    </div>
+    <Loading v-else />
+  </div>
+</template>

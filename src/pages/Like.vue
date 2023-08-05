@@ -1,42 +1,53 @@
+<script setup>
+import { useCartStore } from "@/store/cart.js";
+import { useLikeStore } from "@/store/like.js";
+
+const cartStore = useCartStore()
+const likeStore = useLikeStore()
+
+const onClickDelLike = (item) => {
+  likeStore.addLike(item)
+}
+
+const onClickAdd = (item) => {
+  cartStore.addItem(item)
+}
+
+</script>
+
 <template>
   <div class="container">
-    <div class="like" v-if="likes.length">
+    <div class="like" v-if="likeStore.items.length != 0">
       <div class="like__top">
         <router-link to="/">
           <img src="@/assets/images/toback.svg" alt="" />
         </router-link>
         <h2 class="like__top-title">Мои покупки</h2>
       </div>
-      <div class="products__wrapper">
-        <div class="product" v-for="product in likes" :key="product.id">
-          <button class="product-like" @click="delProductLike(product)">
-            <img src="@/assets/images/likeadd.svg" alt="" />
+      <div class="home__wrapper">
+        <div 
+          class="product" 
+          v-for="item in likeStore.items"
+          :key="item.id"
+        >
+          <button class="product-like" @click="onClickDelLike(item)">
+            <img src="@/assets/images/minusLike.svg" alt="" />
           </button>
           <img
-            :src="getImages(product.images)"
+            :src="'../../public/images/products/' + item.images"
             alt="product.images"
             class="product-img"
           />
-          <p class="product-name">{{ product.title }}</p>
+          <p class="product-name">{{item.title}}</p>
           <div class="product__bottom">
             <div class="product-price">
               <p>Цена:</p>
-              <h3>{{ product.price }} руб.</h3>
+              <h3>{{item.price}} руб.</h3>
             </div>
-            <button
-              v-if="product.inCart"
-              class="product-add"
-              @click="deltoCartProduct(product)"
-            >
-              <img src="@/assets/images/addToCart.svg" alt="" />
-            </button>
-            <button
-              v-else
-              class="product-add"
-              @click="addProductCart(product)"
-            >
-              <img src="@/assets/images/add.svg" alt="" />
-            </button>
+            <div class="product-add" @click="onClickAdd(item)">
+              <img v-if="item.inCart" src="@/assets/images/minusCart.svg" alt="" />
+              <img v-else src="@/assets/images/plusCart.svg" alt="" />
+            </div>
           </div>
         </div>
       </div>
@@ -60,32 +71,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import { useLike } from "@/store/like";
-import { useCart } from "@/store/cart";
-
-const storeLike = useLike();
-const likes = storeLike.likes;
-
-const storeCart = useCart();
-const carts = storeCart.cart;
-
-const addProductCart = (product) => {
-  product.inCart = true
-  carts.push(product)
-};
-
-const deltoCartProduct = () => {
-  console.log('del');
-}
-
-const delProductLike = (product) => {
-  console.log('del');
-  let index = likes.findIndex((el) => el.id == product.id);
-  likes.splice(index, 1);
-}
-
-const getImages = (images) => `../../public/images/products/${images}`;
-</script>

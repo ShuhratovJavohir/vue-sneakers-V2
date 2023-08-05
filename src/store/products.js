@@ -1,20 +1,20 @@
 import { defineStore } from "pinia";
-import axios from "axios";
 
-export const useProducts = defineStore({
-  id: "products",
-  state: () => ({
-    products: null,
-  }),
-  actions: {
-    async getProducts() {
-      try {
-        let response = await axios.get("http://localhost:3000/products");
-        this.products = response.data;
-      } catch (error) {
-        console.error("Ошибка при запросе 404");
-      }
+export const useProductStore = defineStore("product", {
+    state: () => ({
+            
+        isLoading: true,
+    }),
+    actions: {
+        async fetchItems() {
+        this.isLoading = true;
+
+        const res = await fetch("http://localhost:3000/products");
+
+        if (res.ok) {
+            this.items = await res.json();
+        }
+        this.isLoading = false;
+        },
     },
-  },
-  getters: {},
 });

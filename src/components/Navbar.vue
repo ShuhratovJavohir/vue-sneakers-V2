@@ -1,3 +1,14 @@
+<script setup>
+import { useCartStore } from "@/store/cart.js";
+import { computed } from "vue";
+
+const cartStore = useCartStore();
+
+const onClickOpenCart = () => {
+  cartStore.isOpenCart = true;
+};
+</script>
+
 <template>
   <div class="container">
     <nav class="nav">
@@ -5,16 +16,16 @@
       <router-link to="/" class="nav__logo">
         <img class="nav__logo-img" src="@/assets/images/logo.png" alt="logo" />
         <div class="nav__logo-name">
-          <h3>VUE SNEAKERS</h3>
+          <h3>VUE SNEAKERS -V2</h3>
           <p>Магазин лучших кроссовок</p>
         </div>
       </router-link>
       <!-- nav__list -->
       <ul class="nav__list">
-        <li class="nav__list-item" @click="$emit('clickCart', true)">
+        <li class="nav__list-item" @click="onClickOpenCart">
           <a class="nav__list-link cart-btn" href="#">
             <img src="@/assets/images/cart.svg" alt="" />
-            <span>1250 руб.</span>
+            <span>{{cartStore.totalPrice}} руб.</span>
           </a>
         </li>
 
@@ -34,7 +45,3 @@
   </div>
   <hr class="hr" />
 </template>
-
-<script setup>
-import { ref, onMounted } from "vue";
-</script>

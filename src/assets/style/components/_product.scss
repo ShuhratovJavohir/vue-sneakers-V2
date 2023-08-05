@@ -1,26 +1,28 @@
 @import "../fonts.scss";
 
 .product {
-  border: 1px solid #F3F3F3;
+  border: 1px solid #f3f3f3;
   padding: 20px 29px 34px 30px;
   position: relative;
   border-radius: 40px;
   display: flex;
   flex-direction: column;
   gap: 14px;
-	transition: all 100ms linear;
+  transition: all 100ms linear;
 
-	&:hover{
-		transform: translateY(-5px);
-		box-shadow: 0px 14px 30px 0px rgba(0, 0, 0, 0.05);
-	}
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 14px 30px 0px rgba(0, 0, 0, 0.05);
+  }
 
   &-like {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    background-color: transparent;
-    cursor: pointer;
+    & img {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      background-color: transparent;
+      cursor: pointer;
+    }
   }
 
   &-img {
@@ -58,8 +60,8 @@
     }
   }
 
-	&-add{
-			background-color: transparent;
-			cursor: pointer;
-	}
+  &-add {
+    background-color: transparent;
+    cursor: pointer;
+  }
 }

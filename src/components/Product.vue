@@ -1,85 +1,45 @@
+<script setup>
+import { defineProps, onMounted } from "vue";
+import { useCartStore } from "@/store/cart.js";
+import { useLikeStore } from "@/store/like.js";
+
+const props = defineProps({
+  item: { typeof: Object },
+});
+
+const cartStore = useCartStore();
+const likeStore = useLikeStore()
+
+const onClickAdd = (item) => {
+  cartStore.addItem(item);
+};
+
+const onClickAddLike = (item) => {
+  likeStore.addLike(item)
+}
+</script>
+
 <template>
   <div class="product">
-    <button
-      v-if="product.inLike"
-      class="product-like"
-      @click="delLike(product)"
-    >
-      <img src="@/assets/images/likeadd.svg" alt="" />
-    </button>
-    <button v-else class="product-like" @click="addToLike(product)">
-      <img src="@/assets/images/addLike.svg" alt="" />
-    </button>
+    <div class="product-like" @click="onClickAddLike(item)">
+      <img v-if="item.inLike" src="@/assets/images/minusLike.svg" alt="" />
+      <img v-else src="@/assets/images/plusLike.svg" alt="" />
+    </div>
     <img
-      :src="getImages(product.images)"
-      :alt="product.images"
+      :src="'../../public/images/products/' + item.images"
+      :alt="title"
       class="product-img"
     />
-    <p class="product-name">{{ product.title }}</p>
+    <p class="product-name">{{ item.title }}</p>
     <div class="product__bottom">
       <div class="product-price">
         <p>Цена:</p>
-        <h3>{{ product.price }} руб.</h3>
+        <h3>{{ item.price }} руб.</h3>
       </div>
-      <button
-        v-if="product.inCart"
-        class="product-add"
-        @click="delProduct(product)"
-      >
-        <img src="@/assets/images/addToCart.svg" alt="" />
-      </button>
-      <button v-else class="product-add" @click="addProductToCart(product)">
-        <img src="@/assets/images/add.svg" alt="" />
-      </button>
+      <div class="product-add" @click="onClickAdd(item)">
+        <img v-if="item.inCart" src="@/assets/images/minusCart.svg" alt="" />
+        <img v-else src="@/assets/images/plusCart.svg" alt="" />
+      </div>
     </div>
   </div>
-</template>
-
-<script setup>
-import { ref, computed, onMounted } from "vue";
-import { useCart } from "@/store/cart";
-import { useLike } from "@/store/like";
-
-// Для корзины
-const storeCart = useCart();
-const carts = storeCart.cart;
-
-// Для like
-const storeLike = useLike();
-const likes = storeLike.likes;
-
-// Метод для добавление продукта в корзину
-const addProductToCart = (product) => {
-  product.inCart = true;
-  carts.push(product); 
-};
-// Метод для удаление продукта из корзины
-const delProduct = (product) => {
-  product.inCart = false;
-  let index = carts.findIndex((el) => el.id == product.id);
-  carts.splice(index, 1);
-};
-
-const addToLike = (product) => {
-  product.inLike = true;
-  likes.push(product)
-};
-
-const delLike = (product) => {
-  product.inLike = false;
-  let index = likes.findIndex((el) => el.id == product.id);
-  likes.splice(index, 1);
-};
-
-// Получаем через пропсы массив с каждым товаром
-const props = defineProps({
-  product: { typeof: Array },
-});
-
-// Получаем название каждой картинки
-const imagesName = computed(() => props.product.images);
-
-// Метод, который принимает аргумент с названием каждой картинки (${images}), и возвращает путь ../../public/images/products/${images}
-// Картинки должны храниться в папке public
-const getImages = (images) => `../../public/images/products/${images}`;
-</script>
+</template> 
