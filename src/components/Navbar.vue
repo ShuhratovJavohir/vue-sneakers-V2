@@ -6,7 +6,7 @@ const cartStore = useCartStore();
 
 const onClickOpenCart = () => {
   cartStore.isOpenCart = true;
-  document.body.style = "overflow: hidden; margin-right: 20px;";
+  document.body.style = "overflow: hidden; margin-right: 16px;";
 };
 </script>
 
