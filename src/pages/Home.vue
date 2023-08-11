@@ -10,7 +10,9 @@ const productsStore = useProductStore();
 const search = ref("");
 
 const getProducts = computed(() => {
-  return productsStore.items;
+  return productsStore.items.filter((el) => 
+    el.title.includes(search.value)
+  )
 });
 
 onMounted(() => {
