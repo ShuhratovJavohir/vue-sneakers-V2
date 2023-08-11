@@ -14,10 +14,10 @@ const getProducts = computed(() => {
 });
 
 onMounted(() => {
-  if (productsStore.items == 0) {
+  if (!productsStore.items.length) {
     setTimeout(() => {
       productsStore.fetchItems();
-    }, 2000);
+    }, 1000);
   } else {
     console.log("уже есть");
   }

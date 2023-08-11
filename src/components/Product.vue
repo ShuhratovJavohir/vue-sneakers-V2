@@ -30,7 +30,7 @@ const onClickAddLike = (item) => {
       <img v-else src="@/assets/images/plusLike.svg" alt="" />
     </div>
     <img
-      :src="'../../public/images/products/' + item.images"
+      :src="'../images/products/' + item.images"
       :alt="title"
       class="product-img"
     />
