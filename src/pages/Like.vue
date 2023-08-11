@@ -34,7 +34,7 @@ const onClickAdd = (item) => {
             <img src="@/assets/images/minusLike.svg" alt="" />
           </button>
           <img
-            :src="'../../public/images/products/' + item.images"
+            :src="'../images/products/' + item.images"
             alt="product.images"
             class="product-img"
           />

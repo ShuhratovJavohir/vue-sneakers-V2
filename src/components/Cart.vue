@@ -38,7 +38,7 @@ const onClickDel = (item) => {
             :key="item.id"
           >
             <img
-              :src="'../../public/images/products/' + item.images"
+              :src="'../images/products/' + item.images"
               :alt="item.title"
               class="cart__product-img"
             />
