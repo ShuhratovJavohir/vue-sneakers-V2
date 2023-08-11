@@ -10,9 +10,9 @@ const productsStore = useProductStore();
 const search = ref("");
 
 const getProducts = computed(() => {
-  return productsStore.items.filter((el) => 
-    el.title.includes(search.value)
-  )
+  return productsStore.items.filter((el) =>
+    el.title.toLowerCase().includes(search.value.toLowerCase())
+  );
 });
 
 onMounted(() => {
@@ -23,7 +23,7 @@ onMounted(() => {
   } else {
     console.log("уже есть");
   }
-}); 
+});
 </script>
 
 <template>
