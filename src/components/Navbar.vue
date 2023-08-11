@@ -6,6 +6,7 @@ const cartStore = useCartStore();
 
 const onClickOpenCart = () => {
   cartStore.isOpenCart = true;
+  document.body.style = "overflow: hidden; margin-right: 20px;";
 };
 </script>
 
@@ -25,7 +26,7 @@ const onClickOpenCart = () => {
         <li class="nav__list-item" @click="onClickOpenCart">
           <span class="nav__list-link cart-btn">
             <img src="@/assets/images/cart.svg" alt="" />
-            <span>{{cartStore.totalPrice}} руб.</span>
+            <span>{{ cartStore.totalPrice }} руб.</span>
           </span>
         </li>
 

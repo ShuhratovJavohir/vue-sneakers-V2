@@ -5,6 +5,7 @@ import { useCartStore } from "@/store/cart.js";
 const cartStore = useCartStore();
 
 const onClickCloseCart = () => {
+  document.body.style = "overflow: visible;";
   cartStore.isOpenCart = false;  
 };
 
