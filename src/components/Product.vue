@@ -2,21 +2,25 @@
 import { defineProps, onMounted } from "vue";
 import { useCartStore } from "@/store/cart.js";
 import { useLikeStore } from "@/store/like.js";
+import { useProductStore } from "@/store/products.js";
 
 const props = defineProps({
   item: { typeof: Object },
 });
 
 const cartStore = useCartStore();
-const likeStore = useLikeStore()
+const likeStore = useLikeStore();
+const productsStore = useProductStore();
 
 const onClickAdd = (item) => {
+  productsStore.upDateProducts(item)
   cartStore.addItem(item);
 };
 
 const onClickAddLike = (item) => {
-  likeStore.addLike(item)
-}
+  productsStore.upDateProducts(item)
+  likeStore.addLike(item);
+};
 </script>
 
 <template>
