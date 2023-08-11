@@ -23,10 +23,10 @@ const onClickOpenCart = () => {
       <!-- nav__list -->
       <ul class="nav__list">
         <li class="nav__list-item" @click="onClickOpenCart">
-          <a class="nav__list-link cart-btn" href="#">
+          <span class="nav__list-link cart-btn">
             <img src="@/assets/images/cart.svg" alt="" />
             <span>{{cartStore.totalPrice}} руб.</span>
-          </a>
+          </span>
         </li>
 
         <li class="nav__list-item">
@@ -36,9 +36,9 @@ const onClickOpenCart = () => {
         </li>
 
         <li class="nav__list-item">
-          <a class="nav__list-link user" href="#">
+          <sapn class="nav__list-link user">
             <img src="@/assets/images/user.svg" alt="" />
-          </a>
+          </sapn>
         </li>
       </ul>
     </nav>

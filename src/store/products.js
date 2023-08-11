@@ -10,7 +10,7 @@ export const useProductStore = defineStore("product", {
     async fetchItems() {
       this.isLoading = true;
 
-      const res = await fetch("http://localhost:3000/products");
+      const res = await fetch("https://64d5d92f613ee4426d97abc4.mockapi.io/vue-sneakers");
 
       if (res.ok) {
         this.items = await res.json();

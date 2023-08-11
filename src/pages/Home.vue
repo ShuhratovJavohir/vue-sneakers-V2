@@ -13,9 +13,15 @@ const getProducts = computed(() => {
   return productsStore.items;
 });
 
-setTimeout(() => {
-  productsStore.fetchItems();
-}, 3000);
+onMounted(() => {
+  if (productsStore.items == 0) {
+    setTimeout(() => {
+      productsStore.fetchItems();
+    }, 2000);
+  } else {
+    console.log("уже есть");
+  }
+}); 
 </script>
 
 <template>
