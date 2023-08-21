@@ -49,9 +49,10 @@ onMounted(() => {
           <input v-model="search" type="text" placeholder="Поиск..." />
         </div>
       </div>
-      <div class="home__wrapper">
+      <div class="home__wrapper" v-if="getProducts.length">
         <Product v-for="item in getProducts" :key="item.id" :item="item" />
       </div>
+      <h1 v-else>По вашему поиску ничего не найдено</h1>
     </div>
     <Loading v-else />
   </div>

@@ -53,3 +53,16 @@
     }
   }
 }
+
+
+@media (max-width: 500px) {
+  .nav{
+    flex-direction: column;
+    gap: 15px;
+
+    &__list{
+      width: 260px;
+      justify-content: space-between;
+    }
+  }
+}
